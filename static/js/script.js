@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadBtn.addEventListener('click', (e) => {
             e.preventDefault();
             // Assuming resume.pdf is in the static folder
-            window.open('/static/resume.pdf', '_blank');
+            window.open('/resume.pdf', '_blank');
         });
     }
 
