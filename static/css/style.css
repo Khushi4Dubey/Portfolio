@@ -611,3 +611,7 @@ form button {
     padding: 20px;
   }
 }
+body {
+    background-color: #ffffff;
+    color: #000000; /* Adding white text color for better contrast */
+}
