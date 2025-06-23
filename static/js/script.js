@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-links a');
     const sections = document.querySelectorAll('section, header#hero');
     const menuToggle = document.createElement('button');
+    const navbarOverlay = document.querySelector('.navbar-overlay');
     
     // Create mobile menu toggle
     menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
@@ -11,9 +12,25 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.style.display = 'none';
     document.body.appendChild(menuToggle);
     
-    // Toggle mobile menu
-    menuToggle.addEventListener('click', () => {
-        navbar.classList.toggle('mobile-closed');
+    // Open/close sidebar for mobile
+    function openNav() {
+        if (window.innerWidth <= 768) {
+            navbar.classList.add('open');
+            if (navbarOverlay) navbarOverlay.classList.add('active');
+        }
+    }
+    function closeNav() {
+        navbar.classList.remove('open');
+        if (navbarOverlay) navbarOverlay.classList.remove('active');
+    }
+    menuToggle.addEventListener('click', openNav);
+    if (navbarOverlay) {
+        navbarOverlay.addEventListener('click', closeNav);
+    }
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) closeNav();
+        });
     });
     
     // Highlight active section
@@ -39,10 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleResponsive() {
         if (window.innerWidth <= 768) {
             menuToggle.style.display = 'block';
-            navbar.classList.add('mobile-closed');
+            closeNav();
         } else {
             menuToggle.style.display = 'none';
-            navbar.classList.remove('mobile-closed');
+            closeNav();
         }
     }
     
